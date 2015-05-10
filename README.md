@@ -1,8 +1,11 @@
 Whirligig.js
 ============
 
+![Woody Woodpecker, because why not](http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=26992094)
+
 A minimal, straight-forward jQuery plugin for responsive carousels. Uses CSS transforms for the animations, for optimal performance
 
+**Not Working Yet**: This is a work-in-progress. Don't try to use this.
 
 ###DOM Structure
 This plugin expects the following structure:
@@ -39,7 +42,7 @@ Selectors lets you set jQuery selectors for the 'previous' and 'next' controls:
 Options is where you can specify custom behaviour for your carousel.
 
 ######breakpoints
-By default, Whirligig has four breakpoints, and it looks like this:
+By default, Whirligig has four breakpoints, and they look like this:
 
 ```
 {
@@ -56,7 +59,7 @@ By default, Whirligig has four breakpoints, and it looks like this:
 
 
 ######transitionLength
-Specifies the time, in milliseconds, that a transition should take.
+Specifies the time, in milliseconds, that a transition should take. Defaults to 500.
 
 
 
