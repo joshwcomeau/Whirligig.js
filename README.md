@@ -55,7 +55,7 @@ By default, Whirligig has four breakpoints, and they look like this:
 }
 ```
 
-`breakpoints` takes an array of objects, and each object should specify the *maximum* width for this breakpoint, and the number of carousel items to display at once at this breakpoint. For the largest breakpoint, set width to '*'.
+`breakpoints` takes an array of objects, and each object should specify the *maximum* width for this breakpoint, and the number of carousel items to display at once at this breakpoint. *It is important that your array is sorted by width in ascending value*. The last breakpoint in the array will apply for all values above the largest width.
 
 
 ######transitionLength

@@ -21,8 +21,12 @@ jQuery.fn.whirligig = function(selectors, opts) {
 
   // Extend our default opts with any provided opts
   var defaultopts = {
-    numToShow: { small: 1,  medium: 2,  large: 3 },
-    startingSize: 'medium',
+    breakpoints: [
+      { width: 400,  numToShow: 1 },
+      { width: 768,  numToShow: 2 },
+      { width: 1024, numToShow: 3 },
+      { width: '*',  numToShow: 4 }
+    ],
     transitionLength:  0.5
   };
   opts = $.extend({}, defaultopts, opts);
@@ -44,6 +48,31 @@ jQuery.fn.whirligig = function(selectors, opts) {
       console.log("Carousel Items:", $carouselItems.length);
     }
   }.bind(this);
+
+  function calculateNumToShow(breakpoints) {
+    var windowWidth = $(window).width();
+    var numToShow, i;
+
+    // iterate through all but the largest breakpoint, looking for the
+    // biggest breakpoint under the window width.
+    for ( i=0; i<breakpoints.length-1; i++ ) {
+      if ( windowWidth <= breakpoints[i].width ) {
+        // We've found the first breakpoint that meets or exceeds our width.
+        // We're using it!
+        numToShow = breakpoints[i].numToShow;
+        break;
+      }
+
+      // In the case that our window width exceeds our largest breakpoint,
+      // set it automatically to the largest breakpoint.
+      if ( !numToShow ) {
+        numToShow = breakpoints[breakpoints.length-1].numToShow;
+      }
+    }
+
+    return numToShow;
+
+  }
 
 
   function init() {
