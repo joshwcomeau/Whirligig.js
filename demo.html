@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Whirligig.js demonstration</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+  <link href='demo-assets/reset.css' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="Whirligig.js"></script>
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <style type="text/css">
+    body {
+      background: #004358;
+      font-family: 'Lato', sans-serif;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      display: block;
+      float: left;
+    }
+
+    li img {
+      width: 100%;
+    }
+
+    h1 {
+      color: #FFE11A;
+      font-weight: 900;
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    h2 {
+      color: #BEDB39;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    #wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    #main-content {
+      position: relative;
+    }
+
+    .previous, .next {
+      position: absolute;
+      width: 10%;
+      height: 100%;
+      top: 0;
+      cursor: pointer;
+      background: #002B38;
+    }
+
+    .previous .symbol, .next .symbol {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      text-align: center;
+      font-size: 4rem;
+      color: #1F8A70;
+      font-weight: 900;
+    }
+
+    .previous {
+      left: 0;
+    }
+
+    .next {
+      right: 0;
+    }
+
+    .whirligig-container {
+      position: relative;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <h1>Whirligig.js</h1>
+    <h2>A simple demonstration of a simple responsive carousel.</h2>
+  </div>
+
+  <div id="main-content">
+    <div class="previous"><div class="symbol">&lt;</div></div>
+    <div class="whirligig-container">
+      <ul>
+        <li>
+          <img src="demo-assets/demo-pic-1.jpg">
+        </li><li>
+          <img src="demo-assets/demo-pic-2.jpg">
+        </li><li>
+          <img src="demo-assets/demo-pic-3.jpg">
+        </li><li>
+          <img src="demo-assets/demo-pic-4.jpg">
+        </li><li>
+          <img src="demo-assets/demo-pic-5.jpg">
+        </li>
+      </ul>
+    </div>
+    <div class="next"><div class="symbol">&gt;</div></div>
+  </div>
+</body>
+
+<script type="text/javascript">
+  $(".whirligig-container").whirligig({
+    previous: '.previous', next: '.next'
+  });
+</script>
+</html>
