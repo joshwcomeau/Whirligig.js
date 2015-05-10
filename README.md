@@ -1,9 +1,10 @@
 Whirligig.js
 ============
 
-A minimal, straight-forward jQuery plugin for responsive carousels.
+A minimal, straight-forward jQuery plugin for responsive carousels. Uses CSS transforms for the animations, for optimal performance
 
-####How to Use
+
+###DOM Structure
 This plugin expects the following structure:
 
 ```
@@ -20,12 +21,59 @@ This plugin expects the following structure:
 
 The elements can be whatever you like (as long as they're display: block), but the convention is to use ul/li. What's important is you have an outer container that will effectively become the viewport, a collection-holder that holds all of the carousel items, and then the carousel items themselves. We also have our controls for navigating forwards/backwards.
 
-######Enable the carousel
+###How to Use
+
+Whirligig is a standard jQuery extension, bundling all its functionality in the $().whirligig function. This function takes two arguments: selectors and options.
+
+####Selectors
+Selectors lets you set jQuery selectors for the 'previous' and 'next' controls:
 
 ```
+{
+  previous: '.previous',
+  next:     '.next'
+}
+```
+
+####Options
+Options is where you can specify custom behaviour for your carousel.
+
+######breakpoints
+By default, Whirligig has four breakpoints, and it looks like this:
+
+```
+{
+  breakpoints: [
+    { width: 400,  numToShow: 1 },
+    { width: 768,  numToShow: 2 },
+    { width: 1024, numToShow: 3 },
+    { width: '*',  numToShow: 4 }
+  ]
+}
+```
+
+`breakpoints` takes an array of objects, and each object should specify the *maximum* width for this breakpoint, and the number of carousel items to display at once at this breakpoint. For the largest breakpoint, set width to '*'.
+
+
+######transitionLength
+Specifies the time, in milliseconds, that a transition should take.
+
+
+
+###Example Usage
+```
 $('.main-carousel-wrapper').whirligig(
-  { previous:     '.previous', next: '.next' },
-  { startingSize: 'medium' }
+  {
+    previous:     '.previous', next: '.next'
+  }, {
+    breakpoints: [
+      { width: 400,  numToShow: 1 },
+      { width: 1024, numToShow: 2 },
+      { width: 1280, numToShow: 3 },
+      { width: '*',  numToShow: 4 }
+    ],
+    transitionLength: 1000
+  }
 );
 ```
 
