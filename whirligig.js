@@ -31,11 +31,6 @@ jQuery.fn.whirligig = function(selectors, opts) {
   };
   opts = $.extend({}, defaultopts, opts);
 
-  // numToShow is how many carousel items fit in the viewport.
-  // This number changes depending on the window size.
-  numToShow = opts.numToShow[opts.startingSize];
-  if (logging) console.log(numToShow);
-
 
   var setCarouselVariables = function() {
     $carousel      = $(this);
@@ -71,7 +66,6 @@ jQuery.fn.whirligig = function(selectors, opts) {
     }
 
     return numToShow;
-
   }
 
 
@@ -79,8 +73,13 @@ jQuery.fn.whirligig = function(selectors, opts) {
     ////// 1. Do our initial bindings and variable-setting
     setCarouselVariables();
 
+    ////// 2. Figure out how many carousel items to display at once
+    // This number changes depending on the window size.
+    numToShow = calculateNumToShow(opts.breakpoints);
+    if (logging) console.log("Number to show:", numToShow);
 
-    ////// 2. Calculate and set carousel width and carouselItem width.
+
+    ////// 3. Calculate and set carousel width and carouselItem width.
     numOfCarouselItems  = $carouselItems.length;
     carouselWidth       = $carousel.outerWidth();
     carouselItemWidth   = carouselWidth / numToShow;
@@ -97,7 +96,7 @@ jQuery.fn.whirligig = function(selectors, opts) {
     }
 
 
-    ////// 3. Create our CSS 'classes' with these new values, and apply them as needed.
+    ////// 4. Create our CSS 'classes' with these new values, and apply them as needed.
     cssCarouselTransition   = { transition: opts.transitionLength+"s" };
     cssCarouselNoTransition = { transition: "0s" };
     cssCarouselTranslate    = { transform:  "translate(-" + carouselItemWidth + "px)", };
@@ -110,7 +109,7 @@ jQuery.fn.whirligig = function(selectors, opts) {
     $carousel.css( {overflow: "hidden"});
 
 
-    ////// 4. Fill our carousel group to contain at least numToShow+1
+    ////// 5. Fill our carousel group to contain at least numToShow+1
     if ( numOfCarouselItems < numToShow+1 ) {
       $carouselItems.each(function() {
         $(this).clone().appendTo($carouselGroup);
@@ -125,10 +124,6 @@ jQuery.fn.whirligig = function(selectors, opts) {
   function bindEventHandlers() {
     $(selectors.next).on("click", function() { clickHandler('next') });
     $(selectors.previous).on("click", function() { clickHandler('previous') });
-
-    $("body").on("mediaquerychange:to:small",  function() {numToShow = 1;} );
-    $("body").on("mediaquerychange:to:medium", function() {numToShow = 2;} );
-    $("body").on("mediaquerychange:to:large",  function() {numToShow = 3;} );
 
     // If underscore/lodash is available, debounce the init function. Otherwise,
     // just bind it to window resize normally.
